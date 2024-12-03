@@ -10,15 +10,15 @@ Project authentication {
 ////
 //// ------------------------------------------------------
 
-Table auth.accounts as a {
+Table authentication.accounts as a {
 	id UUID [pk]
   created_at DateTime [default: `now()`, not null]
 
   Note: 'Contains users sign in information'
 }
 
-Table auth.refresh_tokens as rt {
-  account_id String [not null]
+Table authentication.refresh_tokens as rt {
+  account_id UUID [not null]
   refresh_token String [unique, not null]
   created_at DateTime [default: `now()`, not null]
 
@@ -30,8 +30,8 @@ Table auth.refresh_tokens as rt {
 }
 
 
-Table auth.magic_link_codes as mlc {
-  account_id String [pk]
+Table authentication.magic_link_codes as mlc {
+  account_id UUID [pk]
   code String [not null]
   is_first_access Boolean [not null]
   created_at DateTime [default: `now()`, not null]
@@ -39,8 +39,8 @@ Table auth.magic_link_codes as mlc {
   Note: 'Contains codes to be used by the users to login'
 }
 
-Table auth.sign_in_providers as sip {
-  account_id String [not null]
+Table authentication.sign_in_providers as sip {
+  account_id UUID [not null]
   provider SignInProviderEnum [not null]
   provider_id String [not null]
   access_token String [not null]
@@ -55,8 +55,8 @@ Table auth.sign_in_providers as sip {
   Note: 'Contains user\'s link to sign in providers, like google, discord, etc'
 }
 
-Table auth.email_addresses as ea {
-  account_id String [not null]
+Table authentication.email_addresses as ea {
+  account_id UUID [not null]
   email_address String [not null]
   created_at DateTime [default: `now()`, not null]
   verified_at DateTime
@@ -69,8 +69,8 @@ Table auth.email_addresses as ea {
   Note: 'Contains user\'s email addresses'
 }
 
-Table auth.phone_numbers as pn {
-  account_id String [not null]
+Table authentication.phone_numbers as pn {
+  account_id UUID [not null]
   country_code String [not null]
   phone_number String [not null]
   created_at DateTime [default: `now()`, not null]
